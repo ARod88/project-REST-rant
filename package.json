@@ -1,0 +1,15 @@
+{
+  "name": "rest-rant",
+  "version": "1.0.0",
+  "description": "rest-rant page ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest-rant",
+    "web"
+  ],
+  "author": "Alma Rodriguez",
+  "license": "ISC"
+}
