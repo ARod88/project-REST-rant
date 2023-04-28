@@ -1,21 +1,21 @@
-const React = require('react');
+const React = require("react");
 
-function Def (html) {
-return (
+function Def(html) {
+  return (
     <html>
-        <head>
-            <title>Title</title>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossOrigin="anonymous"></link>
-            <link rel="stylesheet" href="/css/style.css"/>
-        </head>
-        <body>
-    {html.children}
-        </body>
-
- </html>
-
-)
-
+      <head>
+        <title>Title</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+          crossOrigin="anonymous"
+        ></link>
+        <link rel="stylesheet" href="/css/style.css" />
+      </head>
+      <body>{html.children}</body>
+    </html>
+  );
 }
 
-module.exports = Def
+module.exports = Def;
