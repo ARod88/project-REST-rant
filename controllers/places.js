@@ -15,7 +15,7 @@ router.get ('/', (req,res) => {
 router.post('/', (req, res) => {
   db.Place.create(req.body)
   .then( () => {
-    res,redirect('/places')
+    res.redirect('/places')
   })
   .catch(err => {
     console.log('err', err)
@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.send('places/new')
+  res.render('places/new')
 });
 
 router.get('/:id', (req,res) => {
