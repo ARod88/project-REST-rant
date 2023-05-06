@@ -14,17 +14,34 @@ router.get ('/', (req,res) => {
 
 router.post('/', (req, res) => {
   db.Place.create(req.body)
-  .then( () => {
+  .then(() => {
     res.redirect('/places')
   })
   .catch(err => {
-    console.log('err', err)
+   if ( err && err.name == 'ValidationError') {
+    let message = 'Validation Error:'
+
+    //TODO : Generate error message(s)
+
+    res.render('places/new', { message })
+   }
+   else{
     res.render('error404')
+   }
   })
 });
 
 router.get('/new', (req, res) => {
-  res.render('places/new')
+  db.Place.find()
+  .then((places) => {
+    res.render('places/new', { places })
+  })
+  .catch( err => {
+    console.log(err)
+    res.render('error404')
+  })
+  
+  // res.render('places/new')
 });
 
 router.get('/:id', (req,res) => {
@@ -40,16 +57,37 @@ router.get('/:id', (req,res) => {
 });
 
 router.put('/:id', (req, res) => {
-    res.send('PUT /places/:id stub')
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+      res.render('error404')
+  }
+  else if (!places[id]) {
+      res.render('error404')
+  }
+  else {
+      res.redirect(`/places/${id}`)
+  }
 });
 
 router.delete('/:id', (req, res) => {
   res.send('DELETE /places/:id stub')
 });
 
+
+//EDIT FORM
 router.get('/:id/edit', (req, res) => {
-  res.send('GET edit form stub')
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+      res.render('error404')
+  }
+  else if (!places[id]) {
+      res.render('error404')
+  }
+  else {
+    res.render('places/edit', { place: places[id] })
+  }
 });
+
 
 router.post('/:id/rant', (req, res) => {
   res.send('GET /places/:id/rant stub')
@@ -75,33 +113,33 @@ module.exports = router
 
     
 
-//     // EDIT FORM
+    // EDIT FORM
 
-//     router.get('/:id/edit', (req, res) => {
-//       let id = Number(req.params.id)
-//       if (isNaN(id)) {
-//           res.render('error404')
-//       }
-//       else if (!places[id]) {
-//           res.render('error404')
-//       }
-//       else {
-//         res.render('places/edit', { place: places[id] })
-//       }
-//     });
+    // router.get('/:id/edit', (req, res) => {
+    //   let id = Number(req.params.id)
+    //   if (isNaN(id)) {
+    //       res.render('error404')
+    //   }
+    //   else if (!places[id]) {
+    //       res.render('error404')
+    //   }
+    //   else {
+    //     res.render('places/edit', { place: places[id] })
+    //   }
+    // });
 
-//     router.put('/:id', (req, res) => {
-//       let id = Number(req.params.id)
-//       if (isNaN(id)) {
-//           res.render('error404')
-//       }
-//       else if (!places[id]) {
-//           res.render('error404')
-//       }
-//       else {
-//           res.redirect(`/places/${id}`)
-//       }
-//     });
+    // router.put('/:id', (req, res) => {
+    //   let id = Number(req.params.id)
+    //   if (isNaN(id)) {
+    //       res.render('error404')
+    //   }
+    //   else if (!places[id]) {
+    //       res.render('error404')
+    //   }
+    //   else {
+    //       res.redirect(`/places/${id}`)
+    //   }
+    // });
 
 //     router.put('/:id', (req, res) => {
 //       let id = Number(req.params.id)
