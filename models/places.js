@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const placeSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const placeSchema = new Schema({
    
     name: { type:String, required: true },
     pic: { type: String, default: 'http://placekitten.com/350/350'},
@@ -18,7 +20,7 @@ const placeSchema = new mongoose.Schema({
 placeSchema.methods.showEstablished = function() {
     return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.`
 }
-// create bread model
+// create place model
 const Place = mongoose.model("Place", placeSchema);
 
 // export bread model
