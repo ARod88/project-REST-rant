@@ -53,8 +53,8 @@ const show = (data) => {
                     <textarea id="content" name="content"></textarea>
                 </div>
                 <div>
-                    <label htmlFor="stars">Star Rating:</label>
-                    <input type="number" id="stars" name="stars" step="0.5"></input>
+                    <label htmlFor="stars">Star Rating: 0-10</label>
+                    <input type="range" id="stars" name="stars" min="0" max="10"step="0.5"></input>
                 </div>
                 <div>
                     <label htmlFor="rant">Rant:</label>
