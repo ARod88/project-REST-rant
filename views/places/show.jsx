@@ -14,10 +14,14 @@ const show = (data) => {
         let sumRatings = data.place.comments.reduce((tot, c) => {
             return tot + c.stars
         }, 0)
-        let averageRating = Math.round(sumRatings / data.place.comments.length )
+        let averageRating = Math.round(sumRatings / data.place.comments.length)
+        let stars = ''
+        for ( let i = 0; i< averageRating; i++) {
+            stars += '⭐'
+        }
         rating = (
             <h3>
-                {Math.round(averageRating)} stars
+                {stars} stars
             </h3>
         )
     };
@@ -29,6 +33,13 @@ const show = (data) => {
                 <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
                     Edit</a>
             </div>
+            <div>
+               <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
+                <button type="submit" className="btn btn-danger">
+                    Delete</button>
+                </form>
+            </div>
+
             <div className='row'>
                     <div className='col-sm-6'>
                         <img src={data.place.pic} alt={data.place.name} />
@@ -54,8 +65,8 @@ const show = (data) => {
                     <textarea id="content" name="content"></textarea>
                 </div>
                 <div>
-                    <label htmlFor="stars">Star Rating: 0-10</label>
-                    <input type="range" id="stars" name="stars" min="0" max="10"step="0.5"></input>
+                    <label htmlFor="stars">Star Rating: 0-5</label>
+                    <input type="range" id="stars" name="stars" min="0" max="5"step="0.5"></input>
                 </div>
                 <div>
                     <label htmlFor="rant">Rant:</label>
@@ -64,9 +75,8 @@ const show = (data) => {
                 <button type="submit">Submit</button>
                 </form>
                    <div>
-               <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
-                <button type="submit" className="btn btn-danger">
-                    Delete</button>
+               <form method="POST" action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}>
+                <input type="submit" className="btn btn-danger" defaultValue="Delete Comment"/>
                 </form>
             </div>
              </main>
